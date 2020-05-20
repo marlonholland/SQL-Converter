@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SQL Converter</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Source+Code+Pro:wght@300&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/atelier-cave-light.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Roboto+Slab:wght@300&family=Source+Code+Pro:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="nav">
+        <div class=nav-space-left></div>
+        <div class=nav-logo>
+            <h1>SQLhelper</h1>
+        </div>
+        <div class=nav-contact><a class="contact" href='#'><button>CONTACT</button></a></div>
+        <div class=nav-space-right></div>
+    </header>
+    <div class="container">
+        <div class="pane-1">
+            <div class="top-section-1">
+                <div class="title-box-1">
+                    <img src=images/saphana.png class="logo-1">
+                </div>
+                <div class="top-space-1"></div>
+            </div>
+
+            <div class="middle-section-1">
+                <div class="sql-box-1">
+                    <pre>
+                        <code class="SQL">
+CREATE FUNCTION f_emp_info_2 (p_first_name VARCHAR(255), p_last_name VARCHAR(255)) RETURNS DECIMAL(10,2)
+DETERMINISTIC
+BEGIN
+    DECLARE v_salary DECIMAL(10,2);
+    DECLARE v_max_from_date DATE;
+        
+    SELECT  MAX(s.from_date)
+    INTO  v_max_from_date
+    FROM salaries s 
+    LEFT JOIN employees e on s.emp_no = e.emp_no
+    WHERE e.first_name = p_first_name AND e.last_name = p_last_name;
+    
+    SELECT s.salary 
+    INTO v_salary
+    FROM salaries s
+    LEFT JOIN employees e on s.emp_no = e.emp_no
+    WHERE s.from_date = v_max_from_date
+    AND e.first_name = p_first_name 
+    AND e.last_name = p_last_name;
+    
+    RETURN v_salary;
+END$$
+                        </code>
+                    </pre>
+                </div>
+                <div class="input-box-1">
+                    <div class="host-input-1">
+                        <h3>Host</h3>
+                        <input placeholder="Enter host" name="text-name" type="text" class="input-box" value="" id="in-host">
+                    </div>
+                    <div class="port-input-1">
+                        <h3>Port</h3>
+                        <input placeholder="Enter port" name="text-name" type="text" class="input-box" value="" id="in-port">
+                    </div>
+                    <div class="user-input-1">
+                        <h3>User</h3>
+                        <input placeholder="Enter user" name="text-name" type="text" class="input-box" value="" id="in-user">
+                    </div>
+                    <div class="pass-input-1">
+                        <h3>Pass</h3>
+                        <input placeholder="Enter password" name="text-name" type="text" class="input-box" value="" id="in-pass">
+                    </div>
+                    <div class="table-input-1">
+                        <h3>Table</h3>
+                        <input placeholder="Enter table" name="text-name" type="text" class="input-box" value="" id="in-table">
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-section-1">
+                <div class="button-box-1">
+                    <button type="button" class="normal-button" id="get-button">GET</button>
+                    <button type="button" class="special-button" id="transform-button">TRANSFORM</button>
+                </div>
+                <div class="bottom-space-1"></div>
+            </div>
+        </div>
+        <div class="pane-2">
+            <div class="top-section-2">
+                <div class="title-box-2">
+                    <img src=images/snowflake.png class="logo-1">
+                </div>
+                <div class="top-space-2"></div>
+            </div>
+            <div class="middle-section-2">
+                <div class="sql-box-2">
+                    <pre>
+                        <code class="SQL">
+CREATE FUNCTION f_emp_info_2 (p_first_name VARCHAR(255), p_last_name VARCHAR(255)) RETURNS DECIMAL(10,2)
+DETERMINISTIC
+BEGIN
+    DECLARE v_salary DECIMAL(10,2);
+    DECLARE v_max_from_date DATE;
+        
+    SELECT  MAX(s.from_date)
+    INTO  v_max_from_date
+    FROM salaries s 
+    LEFT JOIN employees e on s.emp_no = e.emp_no
+    WHERE e.first_name = p_first_name AND e.last_name = p_last_name;
+    
+    SELECT s.salary 
+    INTO v_salary
+    FROM salaries s
+    LEFT JOIN employees e on s.emp_no = e.emp_no
+    WHERE s.from_date = v_max_from_date
+    AND e.first_name = p_first_name 
+    AND e.last_name = p_last_name;
+    
+    RETURN v_salary;
+END$$
+                        </code>
+                    </pre>
+                </div>
+                <div class="input-box-2">
+                    <div class="host-input-2">
+                        <h3>Host</h3>
+                        <input placeholder="Enter host" name="text-name" type="text" class="input-box" value="" id="out-host">
+                    </div>
+                    <div class="port-input-2">
+                        <h3>Port</h3>
+                        <input placeholder="Enter port" name="text-name" type="text" class="input-box" value="" id="out-port">
+                    </div>
+                    <div class="user-input-2">
+                        <h3>User</h3>
+                        <input placeholder="Enter user" name="text-name" type="text" class="input-box" value="" id="out-user ">
+                    </div>
+                    <div class="pass-input-2">
+                        <h3>Pass</h3>
+                        <input placeholder="Enter pass" name="text-name" type="text" class="input-box" value="" id="out-pass ">
+                    </div>
+                    <div class="table-input-2">
+                        <h3>Table</h3>
+                        <input placeholder="Enter table" name="text-name" type="text" class="input-box" value="" id="out-table">
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-section-2">
+                <div class="button-box-2">
+                    <button type="button" class="normal-button" id="copy-button">COPY</button>
+                    <button type="button" class="special-button" id="commit-button">COMMIT</button>
+                </div>
+                <div class="bottom-space-2"></div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <footer>
+            <h2>© 2020 Marlon Holland, Manoj Jayamangala</h2>
+        </footer>
+    </div>
+</body>
+<script type="text/javascript" src="app.js"></script>
+
+</html>
